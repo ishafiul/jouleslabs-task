@@ -23,16 +23,16 @@ MaterialColor createMaterialColor(Color color) {
 }
 
 class ArtistaColor {
-  static MaterialColor primary = createMaterialColor(const Color(0xFF097D5D));
+  static MaterialColor primary = createMaterialColor(const Color(0xFF91D5FF));
   static MaterialColor warning = createMaterialColor(const Color(0xFFF39F1D));
   static MaterialColor danger = createMaterialColor(const Color(0xFFD40022));
   static MaterialColor success = createMaterialColor(const Color(0xFF26994B));
   static MaterialColor info = createMaterialColor(const Color(0xFF0758CE));
   static MaterialColor disable = createMaterialColor(const Color(0xFFE5E6EA));
-  static MaterialColor secondary = createMaterialColor(const Color(0xFF474496));
-  static MaterialColor text = createMaterialColor(const Color(0xFF14142B));
+  static MaterialColor secondary = createMaterialColor(const Color(0xFFFFD46A));
+  static MaterialColor text = createMaterialColor(const Color(0xFF2D2D2D));
 
-  static const backgroundColor = Color.fromARGB(255, 231, 231, 231);
+  static const backgroundColor = Color(0xFFFDFEFF);
   static const disableText = Color(0xFF838699);
   static const infoShade20 = Color(0xFFCEE6FC);
 

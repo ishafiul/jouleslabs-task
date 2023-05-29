@@ -12,6 +12,8 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../comon/state/snack_bar/snack_bar_cubit.dart' as _i5;
+import 'bloc_providers.dart' as _i4;
 import 'theme.dart' as _i3;
 
 // ignore_for_file: unnecessary_lambdas
@@ -28,5 +30,7 @@ _i1.GetIt $initGetIt(
     environmentFilter,
   );
   gh.singleton<_i3.AppTheme>(_i3.AppTheme());
+  gh.singleton<_i4.Provider>(_i4.Provider());
+  gh.singleton<_i5.SnackBarCubit>(_i5.SnackBarCubit());
   return getIt;
 }
