@@ -88,6 +88,7 @@ class TodoCalender extends HookWidget {
         todayTextStyle: context.textTheme.bodyLarge!,
         selectedTextStyle: context.textTheme.bodyLarge!,
       ),
+      availableGestures: AvailableGestures.horizontalSwipe,
       headerStyle: HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
