@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/comon/utils/extensions.dart';
 import 'package:todo/comon/widgets/card.dart';
 import 'package:todo/config/const.dart';
@@ -12,12 +13,10 @@ class Services extends StatelessWidget {
       children: [
         Flexible(
           child: ArtistaCard(
-            onTap: (){
-
-            },
+            onTap: () {},
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
-            bgColor: Color(0xFFE5F8D3),
+            bgColor: const Color(0xFFE5F8D3),
             height: 87,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
@@ -38,9 +37,7 @@ class Services extends StatelessWidget {
         ),
         Flexible(
           child: ArtistaCard(
-            onTap: (){
-
-            },
+            onTap: () {},
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
             bgColor: Color(0xFFE1EBFF),
@@ -64,8 +61,8 @@ class Services extends StatelessWidget {
         ),
         Flexible(
           child: ArtistaCard(
-            onTap: (){
-
+            onTap: () {
+              context.go('/todo');
             },
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
@@ -90,9 +87,7 @@ class Services extends StatelessWidget {
         ),
         Flexible(
           child: ArtistaCard(
-            onTap: (){
-
-            },
+            onTap: () {},
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
             bgColor: const Color(0xFFFFEDE5),

@@ -39,7 +39,8 @@ class AppTheme {
         surfaceTintColor: Colors.white,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.all(ArtistaColor.primary),
+        fillColor: MaterialStateProperty.all(Colors.black87),
+        shape: CircleBorder(),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: ArtistaColor.primary,
@@ -95,12 +96,13 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        showUnselectedLabels: true,
+        showUnselectedLabels: false,
         type: BottomNavigationBarType.shifting,
         unselectedLabelStyle: TextStyle(color: ArtistaColor.text),
         selectedLabelStyle: TextStyle(color: ArtistaColor.primary, fontWeight: FontWeight.bold),
         backgroundColor: ArtistaColor.backgroundColor,
         selectedItemColor: ArtistaColor.primary,
+        showSelectedLabels: false,
         unselectedItemColor: ArtistaColor.text,
       ),
       textTheme: TextTheme(

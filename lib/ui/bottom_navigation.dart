@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/config/colors.dart';
 
 class BottomNav extends HookWidget {
   final Widget child;
@@ -9,34 +10,22 @@ class BottomNav extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<int> selectedIndex = useState(0);
+    TabController controller = useTabController(initialLength: 4);
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex.value,
-        onTap: (int index) {
-          selectedIndex.value = index;
-          handelRoute(index: index, context: context);
+      bottomNavigationBar: TabBar(
+        indicatorColor: ArtistaColor.primary,
+        indicatorSize: TabBarIndicatorSize.label,
+        controller: controller,
+        unselectedLabelColor: Colors.grey,
+        labelColor: ArtistaColor.primary,
+        onTap: (index) {
+          handelRoute(context: context, index: index);
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-            ),
-            activeIcon: Icon(
-              Icons.home,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_customize_outlined),
-            activeIcon: Icon(Icons.dashboard_customize),
-            label: 'Generate',
-          ),
-          BottomNavigationBarItem(
-            activeIcon: Icon(Icons.qr_code_scanner),
-            icon: Icon(Icons.qr_code_scanner),
-            label: 'Scan',
-          ),
+        tabs: const [
+          Tab(icon: Icon(Icons.home_filled)),
+          Tab(icon: Icon(Icons.bar_chart_outlined)),
+          Tab(icon: Icon(Icons.notifications)),
+          Tab(icon: Icon(Icons.person)),
         ],
       ),
       body: child,

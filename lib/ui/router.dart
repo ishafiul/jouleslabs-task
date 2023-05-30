@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/ui/bottom_navigation.dart';
-import 'package:todo/ui/home_screen.dart';
+import 'package:todo/ui/home/home_screen.dart';
+import 'package:todo/ui/todo/todo_screen.dart';
 
 GoRouter router = GoRouter(
   debugLogDiagnostics: true,
@@ -20,6 +21,10 @@ GoRouter router = GoRouter(
       ],
       builder: (context, state, child) => BottomNav(child: child),
     ),
+    GoRoute(
+      path: '/todo',
+      pageBuilder: (context, state) => PageAnimation(key: state.pageKey, child: const TodoScreen()),
+    )
   ],
 );
 

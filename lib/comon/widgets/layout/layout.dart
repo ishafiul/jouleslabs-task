@@ -94,45 +94,17 @@ class Layout extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: appBar?.appBarTitle,
             leading: appBar?.leading == null || appBar?.leading?.isLeading == true
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                      left: 15,
-                      bottom: 10,
-                      right: 5,
-                    ),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(32),
-                        color: Colors.white,
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.08),
-                            blurRadius: 12.3636,
-                          ),
-                        ],
-                      ),
-                      child: Container(
-                        height: 32,
-                        width: 32,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                          color: Colors.blueAccent.shade100.withOpacity(.5),
-                        ),
-                        child: IconButton(
-                          onPressed: appBar?.leading?.onTap ??
-                              () {
-                                Navigator.pop(context);
-                              },
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.blueAccent,
-                            size: 21,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                ? IconButton(
+                  onPressed: appBar?.leading?.onTap ??
+                      () {
+                        Navigator.pop(context);
+                      },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black87,
+                    size: 26,
+                  ),
+                )
                 : null,
             expandedHeight: appBar?.expandedHeight ??
                 (appBar?.flexibleSpace != null
