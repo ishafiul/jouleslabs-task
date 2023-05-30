@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/comon/utils/extensions.dart';
 import 'package:todo/comon/widgets/layout/layout.dart';
+import 'package:todo/config/colors.dart';
 import 'package:todo/config/const.dart';
 import 'package:todo/ui/todo/widgets/callender.dart';
 
@@ -19,6 +20,12 @@ class TodoScreen extends HookWidget {
             context.go('/');
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100))),
+        onPressed: () {},
+        backgroundColor: ArtistaColor.secondary,
+        child: Icon(Icons.add,color: Colors.black,),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -50,7 +57,7 @@ class TodoScreen extends HookWidget {
                     value: true,
                     onChanged: (value) {},
                     controlAffinity: ListTileControlAffinity.leading,
-                    title: Text('Retro Meeting', style: context.textTheme.bodyLarge?.copyWith(decoration: TextDecoration.lineThrough,fontWeight: FontWeight.bold)),
+                    title: Text('Retro Meeting', style: context.textTheme.bodyLarge?.copyWith(decoration: TextDecoration.lineThrough, fontWeight: FontWeight.bold)),
                     tileColor: Color(0xFFFFF6E0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
@@ -112,6 +119,9 @@ class TodoScreen extends HookWidget {
                   )
                 ].withSpaceBetween(height: 16),
               ),
+              SizedBox(
+                height: 80,
+              )
             ],
           ),
         ),
