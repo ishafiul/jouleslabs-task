@@ -29,18 +29,38 @@ class TipsCard extends StatelessWidget {
                   ),
                   Text(
                     "How to get up early in the morning!",
-                    style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   Row(
                     children: [
                       Row(
-                        children: [Icon(Icons.access_time), Text("5 min")].withSpaceBetween(width: 6),
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            color: ArtistaColor.primary,
+                          ),
+                          Text("5 min", style: context.textTheme.bodyMedium?.copyWith(color: ArtistaColor.text.shade200))
+                        ].withSpaceBetween(width: 6),
                       ),
                       Row(
-                        children: [Icon(Icons.remove_red_eye_outlined), Text("1.2k")].withSpaceBetween(width: 6),
+                        children: [
+                          Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: ArtistaColor.primary,
+                          ),
+                          Text("1.2k", style: context.textTheme.bodyMedium?.copyWith(color: ArtistaColor.text.shade200))
+                        ].withSpaceBetween(width: 6),
                       ),
                       Row(
-                        children: [Icon(Icons.mode_comment_outlined), Text("865")].withSpaceBetween(width: 6),
+                        children: [
+                          Icon(
+                            Icons.mode_comment_outlined,
+                            color: ArtistaColor.primary,
+                          ),
+                          Text("865", style: context.textTheme.bodyMedium?.copyWith(color: ArtistaColor.text.shade200))
+                        ].withSpaceBetween(width: 6),
                       ),
                     ].withSpaceBetween(width: 12),
                   )

@@ -62,7 +62,7 @@ class Services extends StatelessWidget {
         Flexible(
           child: ArtistaCard(
             onTap: () {
-              context.go('/todo');
+              context.push('/todo');
             },
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
