@@ -3,9 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/config/bloc_providers.dart';
 import 'package:todo/config/getit_config.dart';
 import 'package:todo/config/theme.dart';
+import 'package:todo/data/object_box.dart';
 import 'package:todo/ui/router.dart';
 
-void main() {
+late TodoObjectBox objectBox;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  objectBox = await TodoObjectBox.create();
   configureDependencies();
   runApp(const MyApp());
 }

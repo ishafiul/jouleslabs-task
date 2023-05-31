@@ -8,32 +8,20 @@ GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: '/home',
   routes: [
-    GoRoute(
-      path: '/',
-      name: 'root',
-      redirect: (context, state) {
-        if(state.fullpath == '/'){
-          return '/home';
-        }
-        return null;
-      },
+    ShellRoute(
       routes: [
-        ShellRoute(
-          routes: [
-            GoRoute(
-              path: 'home',
-              name: 'home',
-              pageBuilder: (context, state) => PageAnimation(key: state.pageKey, child: const HomeScreen()),
-            ),
-          ],
-          builder: (context, state, child) => BottomNav(child: child),
-        ),
         GoRoute(
-          path: 'todo',
-          pageBuilder: (context, state) => PageAnimation(key: state.pageKey, child: const TodoScreen()),
-        )
+          path: '/home',
+          name: 'home',
+          pageBuilder: (context, state) => PageAnimation(key: state.pageKey, child: const HomeScreen()),
+        ),
       ],
+      builder: (context, state, child) => BottomNav(child: child),
     ),
+    GoRoute(
+      path: '/todo',
+      pageBuilder: (context, state) => PageAnimation(key: state.pageKey, child: const TodoScreen()),
+    )
   ],
 );
 

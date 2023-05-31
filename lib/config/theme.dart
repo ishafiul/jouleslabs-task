@@ -20,7 +20,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(color: ArtistaColor.primary, fontSize: 14),
+        labelStyle: TextStyle(color: Colors.black, fontSize: 14),
         contentPadding: const EdgeInsets.symmetric(horizontal: Space.xl),
         prefixIconColor: ArtistaColor.disableText.withAlpha(90),
         suffixIconColor: ArtistaColor.disableText.withAlpha(90),
@@ -33,11 +33,10 @@ class AppTheme {
           borderSide: BorderSide(color: ArtistaColor.primary.shade50.withAlpha(90), width: 2),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
+        hintStyle: TextStyle(color: Colors.black26, fontSize: 14),
         fillColor: ArtistaColor.disable,
       ),
-      appBarTheme: const AppBarTheme(
-        surfaceTintColor: Colors.white,
-      ),
+      appBarTheme: const AppBarTheme(surfaceTintColor: Colors.white, elevation: 0),
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateProperty.all(Colors.black87),
         shape: CircleBorder(),
@@ -97,6 +96,7 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         showUnselectedLabels: false,
+        elevation: 0,
         type: BottomNavigationBarType.shifting,
         unselectedLabelStyle: TextStyle(color: ArtistaColor.text),
         selectedLabelStyle: TextStyle(color: ArtistaColor.primary, fontWeight: FontWeight.bold),
@@ -176,13 +176,12 @@ class AppTheme {
           height: 1.2,
         ),
         bodySmall: TextStyle(
-          fontFamily: 'regular',
-          fontSize: 12,
-          color: ArtistaColor.text,
-          fontWeight: FontWeight.w400,
-          height: 22,
-          letterSpacing: 1
-        ),
+            fontFamily: 'regular',
+            fontSize: 12,
+            color: ArtistaColor.text,
+            fontWeight: FontWeight.w400,
+            height: 22,
+            letterSpacing: 1),
         labelLarge: TextStyle(
           fontFamily: 'regular',
           fontSize: 16,
@@ -190,6 +189,11 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           height: 1.2,
         ),
+      ),
+      timePickerTheme: TimePickerThemeData(
+        dialHandColor: ArtistaColor.secondary,
+        hourMinuteColor: ArtistaColor.primary,
+        dayPeriodTextColor: ArtistaColor.text,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: colorScheme.secondary,

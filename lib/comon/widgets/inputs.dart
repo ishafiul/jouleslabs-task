@@ -7,6 +7,10 @@ class AtristaDownItemInput extends StatelessWidget {
   final List<String> items;
   final String? labelText;
   final String? selected;
+  final String? initialItemLabelText;
+  final bool? isInitialItemLabel;
+  final String? labelPrefix;
+  final String? labelSuffix;
   final Function(String value)? onChanged;
 
   const AtristaDownItemInput({
@@ -14,27 +18,34 @@ class AtristaDownItemInput extends StatelessWidget {
     required this.items,
     required this.labelText,
     this.onChanged,
+    this.initialItemLabelText,
+    this.isInitialItemLabel = true,
     this.selected,
+    this.labelPrefix,
+    this.labelSuffix,
   });
 
   List<DropdownMenuItem<String>> _listBuilder(List<String> items, BuildContext context) {
-    final List<DropdownMenuItem<String>> newItems = [
-      DropdownMenuItem(
-        value: 'Select A $labelText',
-        child: Text(
-          toSentenceCase('Select A $labelText'),
-          style: const TextStyle(
-            color: Colors.black38,
+    final List<DropdownMenuItem<String>> newItems = [];
+    if (isInitialItemLabel == true) {
+      newItems.add(
+        DropdownMenuItem(
+          value: 'Select A $labelText',
+          child: Text(
+            initialItemLabelText != null ? initialItemLabelText! : toSentenceCase('Select A $labelText'),
+            style: const TextStyle(color: Colors.black38, fontSize: 14),
           ),
         ),
-      )
-    ];
+      );
+    }
     for (final element in items) {
+      final label =
+          "${labelPrefix != null ? '$labelPrefix ' : ''}${toSentenceCase(element)}${labelSuffix != null ? ' $labelSuffix' : ''}";
       newItems.add(
         DropdownMenuItem(
           value: element,
           child: Text(
-            toSentenceCase(element),
+            label,
             style: context.textTheme.bodyLarge,
           ),
         ),

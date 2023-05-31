@@ -84,7 +84,7 @@ class Layout extends StatelessWidget {
       headerSliverBuilder: (context, innerBoxIsScrolled) => [
         if (appBar != null)
           SliverAppBar(
-            elevation: 4.0,
+            elevation: 0,
             forceElevated: true,
             centerTitle: appBar?.centerTitle,
             backgroundColor: appBar?.flexibleSpace != null ? Colors.grey.shade50 : Colors.white,
