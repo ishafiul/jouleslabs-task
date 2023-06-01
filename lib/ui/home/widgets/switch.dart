@@ -26,10 +26,10 @@ class TipsSortSwitch extends HookWidget {
                 height: 30,
                 decoration: BoxDecoration(
                   color: isSwitch.value == false ? const Color(0xFF91D5FF) : null,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: InkWell(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   onTap: () {
                     isSwitch.value = false;
                   },
@@ -44,7 +44,7 @@ class TipsSortSwitch extends HookWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: InkWell(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   onTap: () {
                     isSwitch.value = true;
                   },

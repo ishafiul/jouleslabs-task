@@ -6,12 +6,13 @@ import 'package:todo/config/colors.dart';
 
 class TodoCalender extends HookWidget {
   final Function(DateTime date) onChange;
+  final DateTime initFocusDay;
 
-  const TodoCalender({super.key, required this.onChange});
+  const TodoCalender({super.key, required this.onChange,required this.initFocusDay});
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<DateTime> _focusDay = useState(DateTime.now());
+    final ValueNotifier<DateTime> focusDay = useState(initFocusDay);
 
     return TableCalendar(
       calendarStyle: CalendarStyle(
@@ -123,13 +124,13 @@ class TodoCalender extends HookWidget {
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       onDaySelected: (selectedDay, focusedDay) {
-        _focusDay.value = selectedDay;
+        focusDay.value = selectedDay;
         onChange(selectedDay);
       },
       selectedDayPredicate: (day) {
-        return isSameDay(day, _focusDay.value);
+        return isSameDay(day, focusDay.value);
       },
-      focusedDay: _focusDay.value,
+      focusedDay: focusDay.value,
     );
   }
 }

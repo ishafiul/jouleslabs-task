@@ -27,6 +27,7 @@ class TodoScheduleBottomSheet extends HookWidget {
       child: Column(
         children: [
           TodoCalender(
+            initFocusDay: DateTime.now(),
             onChange: (date) {
               scheduleDate.value = date;
             },

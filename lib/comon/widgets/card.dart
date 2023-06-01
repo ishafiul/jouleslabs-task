@@ -12,11 +12,13 @@ class ArtistaCard extends StatelessWidget {
   final Function()? onTap;
   final Color? borderColor;
   final Color? bgColor;
+  final BorderRadiusGeometry? borderRadius;
 
   const ArtistaCard({
     super.key,
     this.width,
     this.height,
+    this.borderRadius,
     required this.cardType,
     this.borderColor,
     required this.child,
@@ -38,9 +40,10 @@ class ArtistaCard extends StatelessWidget {
             color: bgColor,
             shape: RoundedRectangleBorder(
               side: BorderSide(color: borderColor ?? _color(cardType)),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
+              borderRadius: borderRadius ??
+                  const BorderRadius.all(
+                    Radius.circular(10),
+                  ),
             ),
             child: SizedBox(
               width: width ?? double.infinity,
@@ -58,7 +61,6 @@ class ArtistaCard extends StatelessWidget {
       ),
     );
   }
-
 
   Color _color(ArtistaCardType type) {
     if (type == ArtistaCardType.primary) {

@@ -38,6 +38,10 @@ class BottomNav extends HookWidget {
         {
           context.go("/home");
         }
+      case 3:
+        {
+          context.go("/login");
+        }
     }
   }
 }

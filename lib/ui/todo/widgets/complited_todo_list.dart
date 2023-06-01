@@ -39,11 +39,11 @@ class CompletedTodoList extends StatelessWidget {
                     },
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(state.completedTodo[index].title, style: context.textTheme.bodyLarge?.copyWith(decoration: TextDecoration.lineThrough, fontWeight: FontWeight.bold)),
-                    tileColor: Color(0xFFFFF6E0),
+                    tileColor: const Color(0xFFFFF6E0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    secondary: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+                    secondary: IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
                   ),
                 ).withSpaceBetween(height: 16),
               ),

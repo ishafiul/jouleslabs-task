@@ -4,7 +4,7 @@ import 'package:todo/config/colors.dart';
 import 'package:todo/config/const.dart';
 
 class HomeFlexibleSpace extends StatelessWidget {
-  const HomeFlexibleSpace({Key? key}) : super(key: key);
+  const HomeFlexibleSpace({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +66,11 @@ class HomeFlexibleSpace extends StatelessWidget {
                           height: Space.md,
                         ),
                         Flexible(
-                            child: Text(
-                          '“If you spend too much time thinking about a thing, you’ll never get it done.”',
-                          style: context.textTheme.bodyMedium?.copyWith(color: ArtistaColor.text.shade200),
-                        )),
+                          child: Text(
+                            '“If you spend too much time thinking about a thing, you’ll never get it done.”',
+                            style: context.textTheme.bodyMedium?.copyWith(color: ArtistaColor.text.shade200),
+                          ),
+                        ),
                       ],
                     ),
                   )

@@ -43,7 +43,7 @@ class PendingTodoList extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    secondary: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+                    secondary: IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
                   ),
                 ).withSpaceBetween(height: 16),
               ),

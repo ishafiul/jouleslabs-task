@@ -30,8 +30,9 @@ class LayoutAppBar {
 class AppbarLeading {
   bool? isLeading;
   Function()? onTap;
+  Widget? child;
 
-  AppbarLeading({this.isLeading = true, this.onTap});
+  AppbarLeading({this.isLeading = true, this.onTap, this.child});
 }
 
 class Layout extends StatelessWidget {
@@ -94,17 +95,18 @@ class Layout extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: appBar?.appBarTitle,
             leading: appBar?.leading == null || appBar?.leading?.isLeading == true
-                ? IconButton(
-                  onPressed: appBar?.leading?.onTap ??
-                      () {
-                        Navigator.pop(context);
-                      },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black87,
-                    size: 26,
-                  ),
-                )
+                ? appBar?.leading?.child ??
+                    IconButton(
+                      onPressed: appBar?.leading?.onTap ??
+                          () {
+                            Navigator.pop(context);
+                          },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black87,
+                        size: 26,
+                      ),
+                    )
                 : null,
             expandedHeight: appBar?.expandedHeight ??
                 (appBar?.flexibleSpace != null

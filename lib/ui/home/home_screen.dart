@@ -7,7 +7,7 @@ import 'package:todo/ui/home/widgets/flexible_space_content.dart';
 import 'package:todo/ui/home/widgets/services.dart';
 import 'package:todo/ui/home/widgets/switch.dart';
 
-import 'widgets/tips.dart';
+import 'package:todo/ui/home/widgets/tips.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -41,46 +41,43 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Services(),
-              SizedBox(
+              const Services(),
+              const SizedBox(
                 height: 30,
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(child: Image.asset('assets/images/_chart.png')), // TODO: need to replace with chart
-                    Flexible(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "11 of 16 Completed",
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: ArtistaColor.text.shade200,
-                          ),
-                        ), // TODO: replace with values
-                        Text("This Week", style: context.textTheme.headlineSmall?.copyWith()),
-                      ],
-                    ))
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(child: Image.asset('assets/images/_chart.png')), // TODO: need to replace with chart
+                  Flexible(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "11 of 16 Completed",
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: ArtistaColor.text.shade200,
+                        ),
+                      ), // TODO: replace with values
+                      Text("This Week", style: context.textTheme.headlineSmall?.copyWith()),
+                    ],
+                  ))
+                ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              TipsSortSwitch(),
-              SizedBox(
+              const TipsSortSwitch(),
+              const SizedBox(
                 height: 15,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Column(
                 children: List.generate(
                   15,
-                  (index) => TipsCard(),
+                  (index) => const TipsCard(),
                 ).withSpaceBetween(height: 15),
               )
             ],

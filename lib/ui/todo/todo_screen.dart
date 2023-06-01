@@ -17,9 +17,11 @@ class TodoScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<DateTime> focusDay = useState(DateTime.now());
+
     useEffect(
       () {
-         context.read<TodoListCubit>().getTodos(date: DateTime.utc(2023, 6, 1));
+        context.read<TodoListCubit>().getTodos(date: DateTime.utc(2023, 6, 1));
         return null;
       },
       [],
@@ -36,10 +38,11 @@ class TodoScreen extends HookWidget {
       floatingActionButton: FloatingActionButton(
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100))),
         onPressed: () async {
+          focusDay.value = DateTime.now();
           ArtistaBottomSheet(context: context, child: const TodoCreateBottomSheet());
         },
         backgroundColor: ArtistaColor.secondary,
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.black,
         ),
@@ -50,20 +53,21 @@ class TodoScreen extends HookWidget {
           child: Column(
             children: [
               TodoCalender(
+                initFocusDay: focusDay.value,
                 onChange: (DateTime date) {
                   final todoListCubit = context.read<TodoListCubit>();
                   todoListCubit.getTodos(date: date);
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
-              CompletedTodoList(),
-              SizedBox(
+              const CompletedTodoList(),
+              const SizedBox(
                 height: 32,
               ),
-              PendingTodoList(),
-              SizedBox(
+              const PendingTodoList(),
+              const SizedBox(
                 height: 80,
               )
             ],

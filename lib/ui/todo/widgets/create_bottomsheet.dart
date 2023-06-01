@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:go_router/go_router.dart';
+import 'package:timezone/standalone.dart' as tz;
 import 'package:todo/comon/state/snack_bar/snack_bar_cubit.dart';
 import 'package:todo/comon/utils/extensions.dart';
 import 'package:todo/comon/widgets/bottom_sheet.dart';
@@ -10,6 +13,7 @@ import 'package:todo/comon/widgets/snackbar.dart';
 import 'package:todo/config/colors.dart';
 import 'package:todo/config/const.dart';
 import 'package:todo/data/states/todo_list/todo_list_cubit.dart';
+import 'package:todo/main.dart';
 import 'package:todo/ui/todo/widgets/schedule_bottomsheet.dart';
 
 final todoFormKey = GlobalKey<FormState>();
@@ -21,7 +25,7 @@ class TodoCreateBottomSheet extends HookWidget {
   Widget build(BuildContext context) {
     final ValueNotifier<DateTime> selectedScheduleDate = useState(DateTime.now());
     final ValueNotifier<String?> selectedReminderMin = useState('0');
-    final ValueNotifier<TimeOfDay?> selectedScheduleTime = useState(TimeOfDay(hour: 0, minute: 0));
+    final ValueNotifier<TimeOfDay?> selectedScheduleTime = useState(TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute+5));
     final ValueNotifier<String> todoTitle = useState('');
     return Form(
       key: todoFormKey,
@@ -134,10 +138,16 @@ class TodoCreateBottomSheet extends HookWidget {
                       final todoListCubit = context.read<TodoListCubit>();
                       final snackbarCubit = context.read<SnackBarCubit>();
                       todoListCubit.createTodos(
-                        date: DateTime.utc(selectedScheduleDate.value.year,selectedScheduleDate.value.month,selectedScheduleDate.value.day),
+                        date: DateTime.utc(selectedScheduleDate.value.year, selectedScheduleDate.value.month, selectedScheduleDate.value.day),
                         title: todoTitle.value,
                         time: selectedScheduleTime.value!,
                         reminderMin: selectedReminderMin.value!,
+                      );
+                      scheduleAlarm(
+                        reminderMin: int.parse(selectedReminderMin.value!),
+                        dateTime: DateTime.utc(
+                            selectedScheduleDate.value.year, selectedScheduleDate.value.month, selectedScheduleDate.value.day, selectedScheduleTime.value!.hour, selectedScheduleTime.value!.minute),
+                        todoTitle: todoTitle.value,
                       );
                       snackbarCubit.snackBar(type: SnackBarType.success, message: "ToDo Added");
                       context.pop();
@@ -157,6 +167,20 @@ class TodoCreateBottomSheet extends HookWidget {
           ].withSpaceBetween(height: 16),
         ),
       ),
+    );
+  }
+
+  Future<void> scheduleAlarm({required String todoTitle, required int reminderMin, required DateTime dateTime}) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      0,
+      'Hey you have a task to do!',
+      todoTitle,
+      tz.TZDateTime(tz.getLocation('Asia/Dhaka'), dateTime.year, dateTime.month, dateTime.day, dateTime.hour, dateTime.minute).subtract(Duration(minutes: reminderMin)),
+      const NotificationDetails(
+        android: AndroidNotificationDetails('your channel id', 'your channel name', channelDescription: 'your channel description'),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 }

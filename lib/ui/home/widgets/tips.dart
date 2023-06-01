@@ -14,7 +14,7 @@ class TipsCard extends StatelessWidget {
       bgColor: const Color(0xFFE5F6FF),
       borderColor: Colors.transparent,
       child: Padding(
-        padding: EdgeInsets.all(Space.xl),
+        padding: const EdgeInsets.all(Space.xl),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

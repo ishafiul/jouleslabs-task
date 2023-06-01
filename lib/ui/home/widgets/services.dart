@@ -40,7 +40,7 @@ class Services extends StatelessWidget {
             onTap: () {},
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
-            bgColor: Color(0xFFE1EBFF),
+            bgColor: const Color(0xFFE1EBFF),
             height: 87,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
@@ -66,7 +66,7 @@ class Services extends StatelessWidget {
             },
             cardType: ArtistaCardType.primary,
             borderColor: Colors.transparent,
-            bgColor: Color(0xFFFFF6E0),
+            bgColor: const Color(0xFFFFF6E0),
             height: 87,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),

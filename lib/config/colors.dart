@@ -32,7 +32,7 @@ class ArtistaColor {
   static MaterialColor secondary = createMaterialColor(const Color(0xFFFFD46A));
   static MaterialColor text = createMaterialColor(const Color(0xFF2D2D2D));
 
-  static const backgroundColor = Color(0xFFFDFEFF);
+  static const backgroundColor = Color(0xFF1A1313);
   static const disableText = Color(0xFF838699);
   static const infoShade20 = Color(0xFFCEE6FC);
 
