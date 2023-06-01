@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/comon/utils/extensions.dart';
 import 'package:todo/comon/widgets/button.dart';
 import 'package:todo/comon/widgets/inputs.dart';
@@ -6,37 +8,55 @@ import 'package:todo/config/colors.dart';
 import 'package:todo/config/const.dart';
 import 'package:todo/ui/todo/widgets/callender.dart';
 
-class TodoScheduleBottomSheet extends StatelessWidget {
-  const TodoScheduleBottomSheet({super.key});
+class TodoScheduleBottomSheet extends HookWidget {
+  final Function(
+      DateTime date,
+      String? reminder,
+      TimeOfDay? scheduleTime,
+      ) onChange;
+
+  const TodoScheduleBottomSheet({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<TimeOfDay> scheduleTime = useState(TimeOfDay(hour: 00, minute: 00));
+    final ValueNotifier<String> reminderMin = useState("0");
+    final ValueNotifier<DateTime> scheduleDate = useState(DateTime.now());
     return Padding(
       padding: const EdgeInsets.all(Space.xl),
       child: Column(
         children: [
           TodoCalender(
-            onChange: (date) {},
+            onChange: (date) {
+              scheduleDate.value = date;
+            },
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Reminder"),
-              Flexible(
-                child: Container(
-                  width: 150,
-                  height: 48,
-                  decoration:
-                      BoxDecoration(color: ArtistaColor.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: InkWell(
+          Form(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Set Time"),
+                Flexible(
+                  child: Container(
+                    width: 150,
+                    height: 48,
+                    decoration: BoxDecoration(color: ArtistaColor.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: InkWell(
                       onTap: () async {
-                        final ff = await showTimePicker(context: context, initialTime: TimeOfDay(hour: 10, minute: 12),);
-                        print(ff?.hour);
+                        final time = await showTimePicker(
+                          context: context,
+                          initialTime: const TimeOfDay(hour: 10, minute: 15),
+                        );
+                        if (time != null) {
+                          scheduleTime.value = time;
+                        }
                       },
-                      child: Center(child: Text("HH:MM"))),
-                ),
-              )
-            ],
+                      child: Center(child: Text("${scheduleTime.value.hour}:${scheduleTime.value.minute}")),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,13 +65,15 @@ class TodoScheduleBottomSheet extends StatelessWidget {
               Flexible(
                 child: Container(
                   width: 150,
-                  decoration:
-                      BoxDecoration(color: ArtistaColor.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: const AtristaDownItemInput(
-                    items: ['5'],
+                  decoration: BoxDecoration(color: ArtistaColor.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: AtristaDownItemInput(
+                    items: const ['5', '10', '15', '30'],
                     labelText: '',
                     labelSuffix: "min ago",
                     initialItemLabelText: "0 min ago",
+                    onChanged: (value) {
+                      reminderMin.value = value;
+                    },
                   ),
                 ),
               )
@@ -63,7 +85,9 @@ class TodoScheduleBottomSheet extends StatelessWidget {
               Button(
                 buttonType: ButtonType.text,
                 buttonSize: ButtonSize.sm,
-                onPressed: () {},
+                onPressed: () {
+                  context.pop();
+                },
                 isFullWidth: false,
                 buttonColor: ButtonColor.secondary,
                 child: Text(
@@ -76,7 +100,10 @@ class TodoScheduleBottomSheet extends StatelessWidget {
               Button(
                 buttonType: ButtonType.elevatedPrimary,
                 buttonSize: ButtonSize.sm,
-                onPressed: () {},
+                onPressed: () {
+                  onChange(scheduleDate.value, reminderMin.value, scheduleTime.value);
+                  context.pop();
+                },
                 isFullWidth: false,
                 buttonColor: ButtonColor.secondary,
                 child: Text(

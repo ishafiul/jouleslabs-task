@@ -39,8 +39,7 @@ class AtristaDownItemInput extends StatelessWidget {
       );
     }
     for (final element in items) {
-      final label =
-          "${labelPrefix != null ? '$labelPrefix ' : ''}${toSentenceCase(element)}${labelSuffix != null ? ' $labelSuffix' : ''}";
+      final label = "${labelPrefix != null ? '$labelPrefix ' : ''}${toSentenceCase(element)}${labelSuffix != null ? ' $labelSuffix' : ''}";
       newItems.add(
         DropdownMenuItem(
           value: element,
@@ -65,7 +64,7 @@ class AtristaDownItemInput extends StatelessWidget {
       value: selected ?? 'Select A $labelText',
       elevation: 16,
       onChanged: (String? value) {
-        if (value != 'Select A $labelText' && value != null) {
+        if (value != 'Select A $labelText' && value != null && onChanged != null) {
           onChanged!(value);
         }
       },

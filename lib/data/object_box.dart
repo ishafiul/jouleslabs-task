@@ -18,12 +18,20 @@ class TodoObjectBox {
     return _todoBox.get(id);
   }
 
-  Todo? createTodo({required int id}) {
-    return _todoBox.get(id);
+  void createTodo({
+    required String dateTime,
+    required String date,
+    required int reminderTime,
+    required String status,
+    required String title,
+  }) {
+    _todoBox.put(Todo(dateTime: dateTime, date: date, status: status, reminderTime: reminderTime, title: title));
   }
 
-  Todo? updateTodo({required int id}) {
-    return _todoBox.get(id);
+   String updateTodoStatus({required int id}) {
+    final data = getTodo(id: id);
+    _todoBox.put(Todo(dateTime: data!.dateTime, date: data.date, status: data.status == 'pending' ? 'done' : "pending", reminderTime: data.reminderTime, title: data.title, id: id));
+    return data.date;
   }
 
   Todo? deleteTodo({required int id}) {
@@ -35,8 +43,8 @@ class TodoObjectBox {
     return query.find();
   }
 
-  List<Todo> getTodosByDate({required DateTime date}) {
-    final query = _todoBox.query().build();
+  List<Todo> getTodosByDate({required String date}) {
+    final query = _todoBox.query(Todo_.date.equals(date).and(Todo_.status.equals('pending'))).build();
     return query.find();
   }
 
@@ -46,7 +54,7 @@ class TodoObjectBox {
   }
 
   List<Todo> getCompletedTodos({required String date}) {
-    final query = _todoBox.query(Todo_.dateTime.equals(date).and(Todo_.status.equals('done'))).build();
+    final query = _todoBox.query(Todo_.date.equals(date).and(Todo_.status.equals('done'))).build();
     return query.find();
   }
 }

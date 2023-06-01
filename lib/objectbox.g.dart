@@ -22,14 +22,14 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 4813632958979311862),
       name: 'Todo',
-      lastPropertyId: const IdUid(6, 3888913781959853536),
+      lastPropertyId: const IdUid(7, 3027303131425958772),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
             id: const IdUid(1, 5926186921836635226),
             name: 'id',
             type: 6,
-            flags: 1),
+            flags: 129),
         ModelProperty(
             id: const IdUid(2, 8777968950176829649),
             name: 'description',
@@ -53,6 +53,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(6, 3888913781959853536),
             name: 'status',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 3027303131425958772),
+            name: 'date',
             type: 9,
             flags: 0)
       ],
@@ -108,13 +113,15 @@ ModelDefinition getObjectBoxModel() {
           final titleOffset = fbb.writeString(object.title);
           final dateTimeOffset = fbb.writeString(object.dateTime);
           final statusOffset = fbb.writeString(object.status);
-          fbb.startTable(7);
+          final dateOffset = fbb.writeString(object.date);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, descriptionOffset);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, dateTimeOffset);
           fbb.addInt64(4, object.reminderTime);
           fbb.addOffset(5, statusOffset);
+          fbb.addOffset(6, dateOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -128,6 +135,8 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 6),
               dateTime: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 10, ''),
+              date: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 16, ''),
               status: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 14, ''),
               reminderTime:
@@ -163,4 +172,7 @@ class Todo_ {
 
   /// see [Todo.status]
   static final status = QueryStringProperty<Todo>(_entities[0].properties[5]);
+
+  /// see [Todo.date]
+  static final date = QueryStringProperty<Todo>(_entities[0].properties[6]);
 }
