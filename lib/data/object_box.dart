@@ -48,16 +48,16 @@ class TodoObjectBox {
     return query.find();
   }
 
-  Todo? getOverlayTodo() {
+  Future<Todo?> getOverlayTodo() async {
     final query = _todoBox.query(Todo_.isOverlayNow.equals(true)).build();
     return query.findFirst();
   }
 
-  void updateOverlayTodo({required Todo data}) {
+  Future<void> updateOverlayTodo({required Todo data}) async {
     _todoBox.put(Todo(dateTime: data.dateTime, date: data.date, status: data.status, reminderTime: data.reminderTime, title: data.title, id: data.id, isAlarm: false));
   }
 
-  Todo? getNotifyTodoNow() {
+  Future<Todo?> getNotifyTodoNow() async {
     final allTodos = getTodos();
     for (final element in allTodos) {
       {
@@ -82,8 +82,9 @@ class TodoObjectBox {
           final timeNow = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour, DateTime.now().minute + element.reminderTime);
           if (alartTime == timeNow) {
             final data = getTodo(id: element.id);
-            _todoBox.put(Todo(dateTime: data!.dateTime, date: data.date, status: data.status, reminderTime: data.reminderTime, title: data.title, id: element.id, isAlarm: false, isOverlayNow: true));
-            return element;
+            _todoBox
+                .put(Todo(dateTime: data!.dateTime, date: data.date, status: data.status, reminderTime: data.reminderTime, title: data.title, id: data.id, isAlarm: false, isOverlayNow: true));
+            return data;
           }
         }
       }

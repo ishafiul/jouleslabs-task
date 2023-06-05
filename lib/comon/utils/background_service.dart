@@ -39,7 +39,7 @@ Future<void> onStart(ServiceInstance service) async {
     service.stopSelf();
   });
   Timer.periodic(const Duration(seconds: 1), (timer) async {
-    final taskData = objectBox.getNotifyTodoNow();
+    final taskData = await objectBox.getNotifyTodoNow();
     if (taskData != null) {
       FlutterOverlayWindow.showOverlay(
         height: 600,
