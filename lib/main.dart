@@ -3,13 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:todo/comon/utils/background_service.dart';
 import 'package:todo/config/bloc_providers.dart';
 import 'package:todo/config/getit_config.dart';
 import 'package:todo/config/theme.dart';
 import 'package:todo/data/object_box.dart';
+import 'package:todo/ui/overlay/overlay.dart';
 import 'package:todo/ui/router.dart';
 
-late TodoObjectBox objectBox;
+late TodoObjectBox? objectBox;
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 void main() async {
@@ -23,9 +25,7 @@ void main() async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
   final DarwinInitializationSettings initializationSettingsDarwin = DarwinInitializationSettings(
-    onDidReceiveLocalNotification: (id, title, body, payload) {
-      // FlutterOverlayWindow.showOverlay(height: 200,width: 200,overlayTitle: 'hello');
-    },
+    onDidReceiveLocalNotification: (id, title, body, payload) {},
   );
   const LinuxInitializationSettings initializationSettingsLinux = LinuxInitializationSettings(defaultActionName: 'Open notification');
   final InitializationSettings initializationSettings =
@@ -37,6 +37,7 @@ void main() async {
 
   objectBox = await TodoObjectBox.create();
   configureDependencies();
+  initBackgroundServices();
   runApp(const MyApp());
 }
 
@@ -44,7 +45,10 @@ void main() async {
 @pragma("vm:entry-point")
 void overlayMain() {
   runApp(
-    const MaterialApp(debugShowCheckedModeBanner: false, home: Material(child: Text("My overlay"))),
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Material(child: OverlayWidget()),
+    ),
   );
 }
 

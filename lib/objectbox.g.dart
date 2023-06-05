@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 4813632958979311862),
       name: 'Todo',
-      lastPropertyId: const IdUid(7, 3027303131425958772),
+      lastPropertyId: const IdUid(9, 1712831958522478118),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -59,6 +59,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 3027303131425958772),
             name: 'date',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 8085806708554002856),
+            name: 'isAlarm',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 1712831958522478118),
+            name: 'isOverlayNow',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -114,7 +124,7 @@ ModelDefinition getObjectBoxModel() {
           final dateTimeOffset = fbb.writeString(object.dateTime);
           final statusOffset = fbb.writeString(object.status);
           final dateOffset = fbb.writeString(object.date);
-          fbb.startTable(8);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, descriptionOffset);
           fbb.addOffset(2, titleOffset);
@@ -122,6 +132,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(4, object.reminderTime);
           fbb.addOffset(5, statusOffset);
           fbb.addOffset(6, dateOffset);
+          fbb.addBool(7, object.isAlarm);
+          fbb.addBool(8, object.isOverlayNow);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -131,6 +143,10 @@ ModelDefinition getObjectBoxModel() {
 
           final object = Todo(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              isAlarm: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 18),
+              isOverlayNow: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 20),
               description: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 6),
               dateTime: const fb.StringReader(asciiOptimization: true)
@@ -175,4 +191,11 @@ class Todo_ {
 
   /// see [Todo.date]
   static final date = QueryStringProperty<Todo>(_entities[0].properties[6]);
+
+  /// see [Todo.isAlarm]
+  static final isAlarm = QueryBooleanProperty<Todo>(_entities[0].properties[7]);
+
+  /// see [Todo.isOverlayNow]
+  static final isOverlayNow =
+      QueryBooleanProperty<Todo>(_entities[0].properties[8]);
 }

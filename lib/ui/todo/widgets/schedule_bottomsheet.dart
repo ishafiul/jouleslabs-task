@@ -10,16 +10,16 @@ import 'package:todo/ui/todo/widgets/callender.dart';
 
 class TodoScheduleBottomSheet extends HookWidget {
   final Function(
-      DateTime date,
-      String? reminder,
-      TimeOfDay? scheduleTime,
-      ) onChange;
+    DateTime date,
+    String? reminder,
+    TimeOfDay? scheduleTime,
+  ) onChange;
 
   const TodoScheduleBottomSheet({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<TimeOfDay> scheduleTime = useState(TimeOfDay(hour: 00, minute: 00));
+    final ValueNotifier<TimeOfDay> scheduleTime = useState(const TimeOfDay(hour: 00, minute: 00));
     final ValueNotifier<String> reminderMin = useState("0");
     final ValueNotifier<DateTime> scheduleDate = useState(DateTime.now());
     return Padding(
@@ -46,7 +46,7 @@ class TodoScheduleBottomSheet extends HookWidget {
                       onTap: () async {
                         final time = await showTimePicker(
                           context: context,
-                          initialTime: const TimeOfDay(hour: 10, minute: 15),
+                          initialTime: TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
                         );
                         if (time != null) {
                           scheduleTime.value = time;
@@ -68,7 +68,7 @@ class TodoScheduleBottomSheet extends HookWidget {
                   width: 150,
                   decoration: BoxDecoration(color: ArtistaColor.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: AtristaDownItemInput(
-                    items: const ['5', '10', '15', '30'],
+                    items: const ['1', '5', '10', '15', '30'],
                     labelText: '',
                     labelSuffix: "min ago",
                     initialItemLabelText: "0 min ago",

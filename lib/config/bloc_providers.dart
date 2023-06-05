@@ -14,5 +14,6 @@ class Provider {
     BlocProvider<TodoListCubit>(
       create: (BuildContext context) => TodoListCubit(),
     ),
+
   ];
 }

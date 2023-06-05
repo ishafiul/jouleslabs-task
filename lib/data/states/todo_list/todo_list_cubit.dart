@@ -11,13 +11,13 @@ class TodoListCubit extends Cubit<TodoListState> {
 
   Future<void> getTodos({required DateTime date}) async {
     emit(TodoListLoading());
-    final pendingTodo = objectBox.getTodosByDate(date: date.toIso8601String());
-    final completedTodo = objectBox.getCompletedTodos(date: date.toIso8601String());
+    final pendingTodo = objectBox!.getTodosByDate(date: date.toIso8601String());
+    final completedTodo = objectBox!.getCompletedTodos(date: date.toIso8601String());
     emit(TodoListLoaded(pendingTodo: pendingTodo, completedTodo: completedTodo));
   }
 
   Future<void> markAsDone({required int id}) async {
-    final date = objectBox.updateTodoStatus(id: id);
+    final date = objectBox!.updateTodoStatus(id: id);
     getTodos(date: DateTime.parse(date));
   }
 
@@ -28,7 +28,7 @@ class TodoListCubit extends Cubit<TodoListState> {
     required String reminderMin,
   }) async {
     final dateTime = DateTime.utc(date.year, date.month, date.day, time.hour, time.minute);
-    objectBox.createTodo(dateTime: dateTime.toIso8601String(), date: date.toIso8601String(), reminderTime: int.parse(reminderMin), status: "pending", title: title);
+    objectBox!.createTodo(dateTime: dateTime.toIso8601String(), date: date.toIso8601String(), reminderTime: int.parse(reminderMin), status: "pending", title: title);
     getTodos(date: date);
   }
 }

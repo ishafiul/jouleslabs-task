@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4813632958979311862",
-      "lastPropertyId": "7:3027303131425958772",
+      "lastPropertyId": "9:1712831958522478118",
       "name": "Todo",
       "properties": [
         {
@@ -43,6 +43,16 @@
           "id": "7:3027303131425958772",
           "name": "date",
           "type": 9
+        },
+        {
+          "id": "8:8085806708554002856",
+          "name": "isAlarm",
+          "type": 1
+        },
+        {
+          "id": "9:1712831958522478118",
+          "name": "isOverlayNow",
+          "type": 1
         }
       ],
       "relations": []

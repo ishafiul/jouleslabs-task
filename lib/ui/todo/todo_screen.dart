@@ -21,7 +21,7 @@ class TodoScreen extends HookWidget {
 
     useEffect(
       () {
-        context.read<TodoListCubit>().getTodos(date: DateTime.utc(2023, 6, 1));
+        context.read<TodoListCubit>().getTodos(date: DateTime.utc(DateTime.now().year, DateTime.now().month, DateTime.now().day));
         return null;
       },
       [],
